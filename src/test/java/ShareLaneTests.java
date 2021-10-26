@@ -10,12 +10,12 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class SharelaneTests {
+public class ShareLaneTests {
     private WebDriver driver;
 
     @BeforeClass (alwaysRun = true)
     public void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver");
+        //System.setProperty("webDriver.chrome.driver", "./src/main/resources/chromedriver");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -68,8 +68,8 @@ public class SharelaneTests {
     @Test
     public void zipCode4DigitsTest() throws InterruptedException {
         // Open browser
-        // Navigate to sharelane (https://www.sharelane.com/cgi-bin/main.py)
-        //Click on the Sign up link
+        // Navigate to shareLane (https://www.sharelane.com/cgi-bin/main.py)
+        //Click on the Sign-up link
         //Enter 4 digits to Zip code filed
         //Click continue button
         //Verify that user is stays on the same page
@@ -91,8 +91,8 @@ public class SharelaneTests {
     @Test
     public void zipCode6DigitsTest() throws InterruptedException {
         // Open browser
-        // Navigate to sharelane (https://www.sharelane.com/cgi-bin/main.py)
-        //Click on the Sign up link
+        // Navigate to shareLane (https://www.sharelane.com/cgi-bin/main.py)
+        //Click on the Sign-up link
         //Enter 6 digits to Zip code filed
         //Click continue button
         //Verify that user is stays on the same page
