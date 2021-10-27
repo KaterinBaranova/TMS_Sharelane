@@ -15,8 +15,8 @@ public class ShareLaneTests {
 
     @BeforeClass (alwaysRun = true)
     public void setUp() {
-        //System.setProperty("webDriver.chrome.driver", "./src/main/resources/chromedriver");
-        WebDriverManager.chromedriver().setup();
+        System.setProperty("webDriver.chrome.driver", "./src/main/resources/chromedriver");
+        //WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -46,7 +46,6 @@ public class ShareLaneTests {
         WebElement registerButton = driver.findElement(By.cssSelector("input[value='Register']"));
         // Assert.assertFalse(zipCodeInput.isDisplayed(),"Zip Code input should not be present");
         Assert.assertTrue(registerButton.isDisplayed(), "Register button should be present");
-
 
     }
 
