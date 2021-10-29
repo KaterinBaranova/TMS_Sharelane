@@ -32,9 +32,9 @@ public class ShareLaneTests {
         driver.get("https://www.sharelane.com");
         WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
         enterButton.click();
-        WebElement signUpLink = driver.findElement(By.cssSelector("<a [href='./register.py']"));
+        WebElement signUpLink = driver.findElement(By.cssSelector("<a [href='/register.py']"));
         signUpLink.click();
-        WebElement zipCodeInput = driver.findElement(By.name("zip_code"));
+        WebElement zipCodeInput = driver.findElement(By.name("Zip_code"));
         zipCodeInput.sendKeys("12345");
         WebElement continueButton = driver.findElement(By.cssSelector("input[value='Continue']"));
         continueButton.click();
@@ -51,6 +51,7 @@ public class ShareLaneTests {
         enterButton.click();
         WebElement signUpLink = driver.findElement(By.cssSelector("<a [href='/register.py']"));
         signUpLink.click();
+
         WebElement continueButton = driver.findElement(By.cssSelector("input[value='Continue']"));
         continueButton.click();
         Assert.assertTrue(continueButton.isDisplayed(), "Continue button should be present");
@@ -88,6 +89,7 @@ public class ShareLaneTests {
 
     @Test
     public void emptySignUp() {
+
         driver.get("https://www.sharelane.com");
         WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
         enterButton.click();
@@ -104,6 +106,7 @@ public class ShareLaneTests {
 
     @Test
     public void validSignUp() {
+
         driver.get("https://www.sharelane.com");
         WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
         enterButton.click();
@@ -127,124 +130,5 @@ public class ShareLaneTests {
         registerButton.click();
         WebElement hereLink = driver.findElement(By.cssSelector("<a [href='./main.py']"));
         Assert.assertTrue(hereLink.isDisplayed(), "Here link should be present");
-    }
-
-    @Test
-    public void AddToCartForUnauthenticated() {
-
-        driver.get("https://www.sharelane.com");
-        WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
-        enterButton.click();
-        WebElement searchInput = driver.findElement(By.name("keyword"));
-        searchInput.sendKeys("White Fang");
-        WebElement searchButton = driver.findElement(By.cssSelector("input[value='Search']"));
-        searchButton.click();
-        WebElement addToCartButton = driver.findElement(By.cssSelector("<a[href='./add_to_cart.py?book_id=2']"));
-        addToCartButton.click();
-        WebElement errorMessage = driver.findElement(By.id("error_message"));
-        Assert.assertEquals(errorMessage.getText(), "Oops, error. You must log in.");
-    }
-
-    @Test
-    public void AddToCartForAuthenticated() {
-        driver.get("https://www.sharelane.com");
-        WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
-        enterButton.click();
-        WebElement emailInput = driver.findElement(By.name("email"));
-        emailInput.sendKeys("rajiv_lin@8988.5.sharelane.com");
-        WebElement passwordInput = driver.findElement(By.name("password"));
-        passwordInput.sendKeys("1111");
-        WebElement loginButton = driver.findElement(By.cssSelector("input[value='Login']"));
-        loginButton.click();
-        WebElement searchInput = driver.findElement(By.name("keyword"));
-        searchInput.sendKeys("White Fang");
-        WebElement searchButton = driver.findElement(By.cssSelector("input[value='Search']"));
-        searchButton.click();
-        WebElement addToCartButton = driver.findElement(By.cssSelector("<a[href='./add_to_cart.py?book_id=2']"));
-        addToCartButton.click();
-        WebElement confirmationMessage = driver.findElement(By.id("confirmation_message"));
-        Assert.assertEquals(confirmationMessage.getText(), "Book was added to the Shopping Cart.");
-    }
-
-    @Test
-    public void ProceedToCheckoutPage() {
-
-        driver.get("https://www.sharelane.com");
-        WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
-        enterButton.click();
-        WebElement emailInput = driver.findElement(By.name("email"));
-        emailInput.sendKeys("rajiv_lin@8988.5.sharelane.com");
-        WebElement passwordInput = driver.findElement(By.name("password"));
-        passwordInput.sendKeys("1111");
-        WebElement loginButton = driver.findElement(By.cssSelector("input[value='Login']"));
-        loginButton.click();
-        WebElement searchInput = driver.findElement(By.name("keyword"));
-        searchInput.sendKeys("White Fang");
-        WebElement searchButton = driver.findElement(By.cssSelector("input[value='Search']"));
-        searchButton.click();
-        WebElement addToCartButton = driver.findElement(By.cssSelector("<a[href='./add_to_cart.py?book_id=2']"));
-        addToCartButton.click();
-        WebElement shoppingCartLink = driver.findElement(By.cssSelector("<a[href='./shopping_cart.py']"));
-        shoppingCartLink.click();
-        WebElement proceedToCheckoutButton = driver.findElement(By.cssSelector("input[value='Proceed to Checkout']"));
-        proceedToCheckoutButton.click();
-        WebElement makePaymentButton = driver.findElement(By.cssSelector("input[value='Make Payment']"));
-        Assert.assertTrue(makePaymentButton.isDisplayed(), "Make Payment button should be present");
-    }
-
-    @Test
-    public void cartUpdatedConfirmationMessage() {
-
-        driver.get("https://www.sharelane.com");
-        WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
-        enterButton.click();
-        WebElement emailInput = driver.findElement(By.name("email"));
-        emailInput.sendKeys("rajiv_lin@8988.5.sharelane.com");
-        WebElement passwordInput = driver.findElement(By.name("password"));
-        passwordInput.sendKeys("1111");
-        WebElement loginButton = driver.findElement(By.cssSelector("input[value='Login']"));
-        loginButton.click();
-        WebElement searchInput = driver.findElement(By.name("keyword"));
-        searchInput.sendKeys("White Fang");
-        WebElement searchButton = driver.findElement(By.cssSelector("input[value='Search']"));
-        searchButton.click();
-        WebElement addToCartButton = driver.findElement(By.cssSelector("<a[href='./add_to_cart.py?book_id=2']"));
-        addToCartButton.click();
-        WebElement shoppingCartLink = driver.findElement(By.cssSelector("<a[href='./shopping_cart.py']"));
-        shoppingCartLink.click();
-        WebElement quantityInput = driver.findElement(By.name("q"));
-        quantityInput.sendKeys("2");
-        WebElement updateButton = driver.findElement(By.cssSelector("input[value='Update']"));
-        updateButton.click();
-        WebElement cartUpdatedConfirmationMessage = driver.findElement(By.id("confirmation_message"));
-        Assert.assertEquals(cartUpdatedConfirmationMessage.getText(), "Cart Updated");
-    }
-
-    @Test
-    public void discountCheck() {
-
-        driver.get("https://www.sharelane.com");
-        WebElement enterButton = driver.findElement(By.cssSelector("<a[href='../cgi-bin/main.py']"));
-        enterButton.click();
-        WebElement emailInput = driver.findElement(By.name("email"));
-        emailInput.sendKeys("rajiv_lin@8988.5.sharelane.com");
-        WebElement passwordInput = driver.findElement(By.name("password"));
-        passwordInput.sendKeys("1111");
-        WebElement loginButton = driver.findElement(By.cssSelector("input[value='Login']"));
-        loginButton.click();
-        WebElement searchInput = driver.findElement(By.name("keyword"));
-        searchInput.sendKeys("White Fang");
-        WebElement searchButton = driver.findElement(By.cssSelector("input[value='Search']"));
-        searchButton.click();
-        WebElement addToCartButton = driver.findElement(By.cssSelector("<a[href='./add_to_cart.py?book_id=2']"));
-        addToCartButton.click();
-        WebElement shoppingCartLink = driver.findElement(By.cssSelector("<a[href='./shopping_cart.py']"));
-        shoppingCartLink.click();
-        WebElement quantityInput = driver.findElement(By.name("q"));
-        quantityInput.sendKeys("63");
-        WebElement updateButton = driver.findElement(By.cssSelector("input[value='Update']"));
-        updateButton.click();
-        WebElement discountAmount = driver.findElement(By.xpath("//table[@align=']/tbody/tr/td[5]//a[1]"));
-        Assert.assertEquals(discountAmount.getText(), "3");
     }
 }
