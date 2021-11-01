@@ -31,7 +31,7 @@ public class InputsTests {
         driver.get("http://the-internet.herokuapp.com/inputs");
         driver.findElement(By.xpath("//input")).sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ARROW_DOWN,Keys.ARROW_DOWN);
         String downKeyResult = driver.findElement(By.xpath("//input")).getAttribute("value");
-        assertEquals(downKeyResult, "-2");}
+        assertEquals(downKeyResult, "-4");}
 
     @Test
     public void stringInputTest(){
