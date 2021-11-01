@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -31,10 +31,15 @@ public class DropdownTests {
 
     @Test
     public void dropdownTest() {
-        Select select = new Select(driver.findElement(By.id("dropdown")));
-        select.selectByValue("1");
-        Assert.assertEquals(select.getFirstSelectedOption().getAttribute("value"),"1");
-        select.selectByValue("2");
-        Assert.assertEquals(select.getFirstSelectedOption().getAttribute("value"),"2");
+        driver.get("http://the-internet.herokuapp.com/dropdown");
+        WebElement option1 = driver.findElement(By.xpath("//select[@id='dropdown']/option[@value='1']"));
+        option1.click();
+        Assert.assertTrue(option1.isSelected(), "Option 1 is selected");
+        WebElement option2 = driver.findElement(By.xpath("//select[@id='dropdown']/option[@value='2']"));
+        option2.click();
+        Assert.assertTrue(option2.isSelected(), "Option 2 is selected");
     }
+
 }
+
+

@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CheckboxesTests {
@@ -32,13 +33,12 @@ public class CheckboxesTests {
     public void checkboxTest() {
 
         driver.get("http://the-internet.herokuapp.com/checkboxes");
-        WebElement firstCheckbox = driver.findElement(By.cssSelector("[type=checkbox 1]"));
-        Assert.assertNull(firstCheckbox.getAttribute("unchecked"));
-        firstCheckbox.click();
-        Assert.assertNotNull(firstCheckbox.getAttribute("checked"));
-        WebElement secondCheckbox = driver.findElement(By.cssSelector("[type=checkbox 2]"));
-        Assert.assertNotNull(secondCheckbox.getAttribute("checked"));
-        secondCheckbox.click();
-        Assert.assertNull(secondCheckbox.getAttribute("unchecked"));
+        List<WebElement> checkBoxes = driver.findElements(By.tagName("input"));
+        Assert.assertFalse(checkBoxes.get(0).isSelected(), "the 1st checkbox is unchecked");
+        checkBoxes.get(0).click();
+        Assert.assertTrue(checkBoxes.get(0).isSelected(), "the 1st checkbox is checked");
+        Assert.assertTrue(checkBoxes.get(1).isSelected(), "the 2nd checkbox is checked");
+        checkBoxes.get(1).click();
+        Assert.assertFalse(checkBoxes.get(1).isSelected(), "the 2nd checkbox is unchecked");
     }
 }
