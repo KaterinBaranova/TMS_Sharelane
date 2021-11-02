@@ -5,12 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DropdownTests {
@@ -32,14 +34,11 @@ public class DropdownTests {
     @Test
     public void dropdownTest() {
         driver.get("http://the-internet.herokuapp.com/dropdown");
-        WebElement option1 = driver.findElement(By.xpath("//select[@id='dropdown']/option[@value='1']"));
-        option1.click();
-        Assert.assertTrue(option1.isSelected(), "Option 1 is selected");
-        WebElement option2 = driver.findElement(By.xpath("//select[@id='dropdown']/option[@value='2']"));
-        option2.click();
-        Assert.assertTrue(option2.isSelected(), "Option 2 is selected");
+        Select select = new Select(driver.findElement(By.id("dropdown")));
+        List<WebElement> selectOptions = select.getAllSelectedOptions();
+        Assert.assertEquals(selectOptions.size(), 2);
+        Assert.assertEquals(selectOptions.get(0).getText(), "Please select an option");
+        Assert.assertEquals(selectOptions.get(1).getText(), "Option 1");
+        Assert.assertEquals(selectOptions.get(2).getText(), "Option 2");
     }
-
 }
-
-
