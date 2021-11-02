@@ -35,8 +35,8 @@ public class DropdownTests {
     public void dropdownTest() {
         driver.get("http://the-internet.herokuapp.com/dropdown");
         Select select = new Select(driver.findElement(By.id("dropdown")));
-        List<WebElement> selectOptions = select.getAllSelectedOptions();
-        Assert.assertEquals(selectOptions.size(), 2);
+        List<WebElement> selectOptions = select.getOptions();
+        Assert.assertEquals(selectOptions.size(), 3);
         Assert.assertEquals(selectOptions.get(0).getText(), "Please select an option");
         Assert.assertEquals(selectOptions.get(1).getText(), "Option 1");
         Assert.assertEquals(selectOptions.get(2).getText(), "Option 2");
